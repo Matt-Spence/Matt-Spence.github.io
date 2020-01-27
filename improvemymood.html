@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        background-color: black;
+        text-align: center;
+        color: white;
+
+    }
+    .imgButton {
+        text-align: center;
+    }
+
+    .button {
+        background-color: #e7e7e7; /* Green */
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 200px;
+    }
+</style>
+<body>
+
+<h2>Your Mood has been Improved</h2>
+
+<p id="ImproveMyMood"></p>
+
+<div class="imgButton">
+    <button type="button" class="button" onclick="makeRequest()">Another!</button>
+</div>
+
+<img src = "https://images.dog.ceo/breeds/pug/n02110958_12224.jpg" id = "image" style="width:200px">
+
+<script>
+    var xmlHttp;
+    function makeRequest() {
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "https://dog.ceo/api/breeds/image/random", true);
+        xmlHttp.send();
+        xmlHttp.addEventListener("readystatechange",processRequest, false);
+    }
+
+    function processRequest(e){
+        if(xmlHttp.readyState ==4 && xmlHttp.status==200){
+            var response = JSON.parse(xmlHttp.responseText);
+            var src = response.message;
+            //document.getElementById('ImproveMyMood').innerHTML = src;
+            document.getElementById('image').src = src;
+        }
+    }
+</script>
+
+</body>
+</html>
